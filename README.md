@@ -1,0 +1,1 @@
+Implementing algorithms and data structures from scratch in Python for learning purposes.
