@@ -1,4 +1,3 @@
-from typing import List
 """
 BST classes for benchmarking comparisons
 """
@@ -152,7 +151,65 @@ class BSTMap:
 
         
     def _iterative_delete(self, key):
-        pass
+        curr = self.root
+        prev = None
+
+        # Find the node to delete and obtain its parent
+        while curr and curr.key != key:
+            prev = curr
+            if key < curr.key:
+                curr = curr.left
+            else:
+                curr = curr.right
+        # Curr is now placed at the node to delete
+        
+        if not curr:
+            # Node not found
+            return None
+        
+        # Node has at most 1 child
+        if not curr.left or not curr.right:
+            # Replaces the node to be deleted
+            replacement = None
+
+            # Right child does not exist
+            if curr.left:
+                replacement = curr.left
+            else:
+                replacement = curr.right
+
+            # Node to delete is the root
+            if not prev:
+                self.root = replacement
+                return replacement
+            # Node to delete is a left child
+            elif prev.left == curr:
+                prev.left = replacement
+            # Node to delete is a right child
+            else:
+                prev.right = replacement
+            curr = None
+        # Node has 2 children to delete
+        else:
+            
+            # Find inorder successor
+            successor = curr.right
+            succ_parent = curr
+            while successor.left:
+                succ_parent = successor
+                successor = successor.left
+
+            # Replace the node to delete with its inorder successor
+            curr.key = successor.key
+            curr.val = successor.val
+
+            # Delete the inorder successor
+            if successor.right:
+                succ_parent.left = successor.right
+            else:
+                succ_parent.left = None
+        
+        return self.root
 
     def _recursive_delete(self, key):
         pass
@@ -161,7 +218,7 @@ class BSTMap:
         if self.method == "iterative":
             return self._iterative_delete(key)
         elif self.method == "recursive":
-            return self._recursive_delete(key)
+            raise NotImplementedError("recursive delete not implemented yet")	
         else:
             raise NotImplementedError("method must be one of 'iterative' or 'recursive'")
         
@@ -187,6 +244,7 @@ if __name__ == "__main__":
 
     print(tree)
     print(tree.traverse())
+    print(tree.search(7))
 
     
 
