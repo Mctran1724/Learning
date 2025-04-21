@@ -221,8 +221,6 @@ class BSTMap:
             raise NotImplementedError("recursive delete not implemented yet")	
         else:
             raise NotImplementedError("method must be one of 'iterative' or 'recursive'")
-        
-        
 
 
 
@@ -245,6 +243,7 @@ if __name__ == "__main__":
     print(tree)
     print(tree.traverse())
     print(tree.search(7))
+    print()
 
     
 
