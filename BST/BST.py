@@ -245,5 +245,8 @@ if __name__ == "__main__":
     print(tree.search(7))
     print()
 
-    
+      
 
+
+    d = dict
+    d.pop(  )
